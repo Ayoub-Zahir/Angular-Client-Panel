@@ -1,0 +1,64 @@
+<app-sidebar></app-sidebar>
+<div class="side-margin-left" style="min-height: 100vh;">
+    <div class="uk-container uk-section">
+
+        <!-- Header  -->
+        <div class="uk-clearfix">
+            <h2 class="uk-float-left">Client details</h2>
+
+            <!-- Edit && Delete button  -->
+            <div class="uk-float-right">
+                <button routerLink="/edit-client/{{client?.id}}" class="uk-button uk-button-secondary edit-btn uk-text-bold">Edit</button>
+                <button (click)="onDelete(client.id)" class="uk-button uk-button-danger delete-btn uk-text-bold">Delete</button>
+            </div>
+        </div>
+
+        <!-- Card  -->
+        <div class="uk-card uk-card-default uk-padding section-radius uk-margin-medium-top">
+            <!-- Part1: Img  -->
+            <img class="uk-align-center uk-border-circle uk-position-top" src="{{client?.img}}" width="200" height="200" uk-img>
+
+            <!-- Part2  -->
+            <div class="margin-top">
+                <h3 class="uk-card-title uk-text-center uk-text-bold uk-margin-remove-bottom">{{client?.firstName | titlecase}} {{client?.lastName | titlecase}}</h3>
+
+                <!-- Balance button  -->
+                <button class="uk-button uk-align-center uk-text-bold" [ngClass]="hasBalance? 'danger' : 'primary'" uk-toggle="target: #update" uk-tooltip="title:Update the balance; pos: bottom">
+                Balance
+                <span class="uk-margin-right ">{{client?.balance|currency}}</span>
+                <span class="material-icons uk-text-middle ">edit</span>
+            </button>
+
+                <!-- update balance  -->
+                <form *ngIf="client" (ngSubmit)="onSubmit()" hidden id="update" class="uk-flex uk-flex-center" uk-grid>
+                    <div>
+                        <input class="uk-input" type="number" min="0" name="balance" [(ngModel)]="client.balance" style="height: 37.07px;">
+                    </div>
+                    <div class="uk-padding-remove-left">
+                        <button class="uk-button uk-button-warning uk-text-bold" type="submit">Update</button>
+                    </div>
+                </form>
+
+                <!-- More info  -->
+                <ul class="uk-list uk-list-large uk-list-divider uk-margin-top ">
+                    <li></li>
+                    <li>
+                        <span class="material-icons uk-text-middle text-primary ">mail</span> Email: <span class="uk-text-bold ">{{client?.email}}</span>
+                    </li>
+                    <li>
+                        <span class="material-icons uk-text-middle text-primary ">call</span> Phone: <span class="uk-text-bold ">{{client?.phone}}</span>
+                    </li>
+                    <li>
+                        <span class="material-icons text-primary uk-text-middle">monetization_on</span> Balance: <span class="uk-text-bold ">{{client?.balance | currency}}</span>
+                    </li>
+                    <li>
+                        <span class="material-icons uk-text-middle text-primary ">location_on</span> Location: <span class="uk-text-bold ">{{client?.location | titlecase}}</span>
+                    </li>
+                    <li>
+                        <span class="material-icons uk-text-middle text-primary ">schedule</span> Join At: <span class="uk-text-bold ">{{client?.joinAt | date: 'MMM d, y, h a'}}</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

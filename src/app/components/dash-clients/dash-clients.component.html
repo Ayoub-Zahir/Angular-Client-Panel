@@ -1,0 +1,49 @@
+<div class="uk-section">
+    <h2>Clients</h2>
+
+    <div class="uk-card uk-card-default uk-padding section-radius">
+        <table class="uk-table uk-table-divider table-hover">
+            <thead>
+                <tr class="uk-text-center">
+                    <th></th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Balance</th>
+                    <th>Join At</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="uk-box-shadow-hover-medium" *ngFor="let client of clients">
+                    <td routerLink="/client/{{client.id}}" style="cursor: pointer;">
+                        <img src="{{client.img}}" alt="{{client.lastName}}Img" class="uk-border-circle avatar-size">
+                    </td>
+                    <td class="uk-text-middle">{{client.firstName | titlecase}}</td>
+                    <td class="uk-text-middle">{{client.lastName | uppercase}}</td>
+                    <td class="uk-text-middle">{{client.email}}</td>
+                    <td class="uk-text-middle">{{client.location | titlecase}}</td>
+                    <td class="uk-text-middle">{{client.balance | currency}}</td>
+                    <td class="uk-text-middle">{{client.joinAt | date}}</td>
+                    <td class="uk-text-middle">
+                        <a href="#" class="uk-icon-link" uk-icon="more"></a>
+                        <div uk-dropdown="mode: click" style="padding: 20px; min-width: 150px !important;">
+                            <ul class="uk-nav uk-dropdown-nav">
+                                <li>
+                                    <a routerLink="/client/{{client.id}}" class="details"><span class="uk-margin-small-right " uk-icon="icon: info"></span>More Details</a>
+                                </li>
+                                <li>
+                                    <a routerLink="/edit-client/{{client.id}}" class="edit"><span class="uk-margin-small-right" uk-icon="icon: pencil"></span> Edit</a>
+                                </li>
+                                <li>
+                                    <a (click)="onDelete(client.id)" class="delete"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Delete</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

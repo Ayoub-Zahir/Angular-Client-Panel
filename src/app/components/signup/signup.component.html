@@ -1,0 +1,55 @@
+<app-navbar></app-navbar>
+
+<div class="uk-grid-collapse uk-child-width-expand" uk-grid style="height: 90vh;">
+
+    <!-- Background img  -->
+    <div class="uk-animation-slide-right">
+        <div class="img-background">
+        </div>
+    </div>
+
+    <!-- Sign up form -->
+    <div class="uk-container uk-flex uk-flex-middle uk-flex-center uk-padding-remove-right uk-animation-slide-left">
+        <form class="uk-form-stacked">
+            <h2 class="uk-text-uppercase uk-text-center uk-heading-medium">Sign Up</h2>
+
+            <div class="uk-fieldset uk-margin-large-top">
+                <!-- Email field  -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Email</label>
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: user"></span>
+                        <input class="uk-input uk-form-width-large" type="text" placeholder="example@gmail.com">
+                    </div>
+                </div>
+
+                <!-- Password field  -->
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Password</label>
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input class="uk-input uk-form-width-large" type="password" placeholder="***********">
+                    </div>
+                </div>
+                <div class="uk-margin">
+                    <label class="uk-form-label" for="form-stacked-text">Conform Password</label>
+                    <div class="uk-inline">
+                        <span class="uk-form-icon" uk-icon="icon: lock"></span>
+                        <input class="uk-input uk-form-width-large" type="password" placeholder="***********">
+                    </div>
+                </div>
+
+                <!-- Submit  -->
+                <div class="uk-margin" uk-grid>
+                    <div class="uk-width-1-3">
+                        <button class="uk-button uk-button-primary uk-text-bold uk-border-pill uk-float-left" type="submit" style="width: 150%;">Sign Up</button>
+                    </div>
+                    <div class="uk-width-expand uk-flex uk-flex-middle">
+                        <a class="uk-link-muted" routerLink="/login">You have already an account? <strong class="uk-text-primary">Log In</strong></a>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

@@ -1,0 +1,34 @@
+<!-- sidebar on large scree  -->
+<aside id="left-col" class="uk-light uk-flex uk-flex-middle uk-flex-center uk-visible@m">
+    <div class="bar-wrap">
+        <ul class="uk-nav uk-nav-primary uk-nav-center uk-margin-auto-vertical ">
+            <li class="uk-active uk-position-top uk-margin-top">
+                <a class="logo" routerLink="/dashboard"> <span class="text-danger">ng</span> panel</a>
+            </li>
+
+            <li class="uk-text-left" routerLinkActive="uk-active">
+                <a routerLink="/dashboard">
+                    <span class="uk-margin-small-right" uk-icon="icon: desktop"></span> Dashboard
+                </a>
+            </li>
+
+            <li class="uk-text-left" routerLinkActive="uk-active">
+                <a routerLink="/add-client">
+                    <span class="uk-margin-small-right" uk-icon="icon: plus"></span> Add Client
+                </a>
+            </li>
+
+            <li class="uk-text-left" routerLinkActive="uk-active">
+                <a routerLink="/setting">
+                    <span class="uk-margin-small-right" uk-icon="icon: settings"></span> Settings
+                </a>
+            </li>
+
+            <li class="uk-text-left">
+                <a (click)="logout()">
+                    <span class="uk-margin-small-right" uk-icon="icon: sign-out"></span> Logout
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>

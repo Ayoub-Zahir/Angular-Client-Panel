@@ -1,0 +1,27 @@
+<div class="uk-section">
+    <h2>Statistics</h2>
+
+    <div class="uk-child-width-1-3@m uk-grid-small uk-grid-match uk-text-center" uk-grid>
+        <div>
+            <div class="uk-card uk-card-default uk-card-body section-radius">
+                <i class="material-icons fs-60 text-danger">monetization_on</i>
+                <h4 class="uk-card-title">Total Owned</h4>
+                <h3 class="uk-margin-remove-top">{{totalOwn | currency}}</h3>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-danger uk-card-body uk-light section-radius">
+                <i class="material-icons fs-60 text-white">whatshot</i>
+                <h4 class="uk-card-title">Highest balance</h4>
+                <h3 class="uk-margin-remove-top">{{highestBalance | currency}}</h3>
+            </div>
+        </div>
+        <div>
+            <div class="uk-card uk-card-default uk-card-body section-radius">
+                <i class="material-icons fs-60 text-danger">trending_down</i>
+                <h4 class="uk-card-title">Lowest balance</h4>
+                <h3 class="uk-margin-remove-top">{{lowestBalance | currency}}</h3>
+            </div>
+        </div>
+    </div>
+</div>

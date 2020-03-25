@@ -1,0 +1,42 @@
+.uk-position-top {
+    top: -100px;
+}
+
+.primary {
+    background-color: #3C91E6 !important;
+    color: #fff;
+    border-radius: 20px;
+    margin-top: 10px !important;
+}
+
+.danger {
+    background-color: #F25F5C !important;
+    color: #fff;
+    border-radius: 20px;
+    margin-top: 10px !important;
+}
+
+.margin-top {
+    margin-top: 90px;
+    padding: 0 30px !important;
+}
+
+.uk-card {
+    padding: 25px;
+}
+
+.uk-input:focus,
+.uk-select:focus,
+.uk-textarea:focus {
+    border-color: rgb(229, 229, 229) !important;
+}
+
+.delete-btn {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.edit-btn {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+}

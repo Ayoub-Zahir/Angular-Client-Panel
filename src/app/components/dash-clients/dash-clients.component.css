@@ -1,0 +1,26 @@
+.avatar-size {
+    width: 50px;
+    height: 50px;
+}
+
+.details:hover {
+    color: #0D1B1E;
+}
+
+.edit:hover {
+    color: #0D1B1E;
+}
+
+.delete:hover {
+    color: #F25F5C;
+}
+
+
+/* .uk-table-hover :hover {
+    background-color: whitesmoke !important;
+} */
+
+.table-hover tbody tr:hover td,
+.table-hover tbody tr:hover th {
+    background-color: whitesmoke !important;
+}
