@@ -1,6 +1,8 @@
 <app-sidebar></app-sidebar>
-<div class="side-margin-left" style="min-height: 100vh;">
-    <div class="uk-container uk-section">
+<app-navbar></app-navbar>
+
+<div class="side-margin-left" style="min-height: calc(100vh - 70px);">
+    <div class="uk-container uk-section" style="width: 80%;">
 
         <!-- Header  -->
         <div class="uk-clearfix">
@@ -16,7 +18,7 @@
         <!-- Card  -->
         <div class="uk-card uk-card-default uk-padding section-radius uk-margin-medium-top">
             <!-- Part1: Img  -->
-            <img class="uk-align-center uk-border-circle uk-position-top" src="{{client?.img}}" width="200" height="200" uk-img>
+            <img class="uk-align-center uk-border-circle uk-position-top" src="{{client?.img}}" width="190" height="190" uk-img>
 
             <!-- Part2  -->
             <div class="margin-top">
@@ -32,10 +34,10 @@
                 <!-- update balance  -->
                 <form *ngIf="client" (ngSubmit)="onSubmit()" hidden id="update" class="uk-flex uk-flex-center" uk-grid>
                     <div>
-                        <input class="uk-input" type="number" min="0" name="balance" [(ngModel)]="client.balance" style="height: 37.07px;">
+                        <input [disabled]="setting?.disableBalanceOnEdit" class="uk-input" type="number" min="0" name="balance" [(ngModel)]="client.balance" style="height: 37.07px;">
                     </div>
                     <div class="uk-padding-remove-left">
-                        <button class="uk-button uk-button-warning uk-text-bold" type="submit">Update</button>
+                        <button [disabled]="setting?.disableBalanceOnEdit" class="uk-button uk-button-warning uk-text-bold" type="submit">Update</button>
                     </div>
                 </form>
 

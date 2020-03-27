@@ -18,7 +18,7 @@ export class ClientService {
 
     constructor(private ngFireStore: AngularFirestore) {
         // Get the clients colletion
-        this.clientsCollection =  this.ngFireStore.collection('clients', ref => ref.orderBy('joinAt', 'desc'));
+        this.clientsCollection = this.ngFireStore.collection('clients', ref => ref.orderBy('joinAt', 'desc'));
     }
 
     getClients(): Observable<Client[]> {
@@ -35,7 +35,7 @@ export class ClientService {
         );
     }
 
-    getClient(id: string): Observable<Client>{
+    getClient(id: string): Observable<Client> {
         // Get the client document
         this.clientDocument = this.ngFireStore.collection('clients').doc(id);
 
@@ -43,16 +43,15 @@ export class ClientService {
         return this.clientDocument.valueChanges();
     }
 
-    addClient(client: Client){
+    addClient(client: Client) {
         this.clientsCollection.add(client);
     }
 
-    updateClient(client: Client){
-        // Get the client document
-        this.ngFireStore.collection('clients').doc(client.id).update(client);
+    updateClient(client: Client) {
+        this.clientsCollection.doc(client.id).update(client);
     }
 
-    deleteClient(id: string){
-        this.ngFireStore.collection('clients').doc(id).delete();
+    deleteClient(id: string) {
+        this.clientsCollection.doc(id).delete();
     }
 }

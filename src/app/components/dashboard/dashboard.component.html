@@ -1,8 +1,6 @@
 <app-sidebar></app-sidebar>
 <app-navbar></app-navbar>
-<div class="side-margin-left " style="min-height: 100vh; ">
-    <div class="uk-container ">
-        <app-dash-statistic [clientsObs]="clientsObs "></app-dash-statistic>
-        <app-dash-clients [clientsObs]="clientsObs "></app-dash-clients>
-    </div>
+<div class="side-margin-left " style="height: calc(100vh - 7000px);">
+    <app-dash-statistic [clientsObs]="clientsObs "></app-dash-statistic>
+    <app-dash-clients [clientsObs]="clientsObs "></app-dash-clients>
 </div>

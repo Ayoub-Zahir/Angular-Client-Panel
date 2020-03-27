@@ -1,7 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { SettingService } from 'src/app/services/setting.service';
 import { ClientService } from 'src/app/services/client.service';
+
+import { Setting } from 'src/app/models/Setting';
 import { Client } from 'src/app/models/client';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,14 +17,17 @@ import Swal from 'sweetalert2';
 export class ClientDetailsComponent implements OnInit {
     client: Client;
     hasBalance: boolean = false;
+    setting: Setting;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private clientService: ClientService,
+        private settingService: SettingService,
         private router: Router
     ) { }
 
     ngOnInit() {
+        // Getting the client
         const idClient = this.activeRoute.snapshot.paramMap.get('id');
         this.clientService.getClient(idClient).subscribe(data => {
             if (data) {
@@ -34,9 +42,12 @@ export class ClientDetailsComponent implements OnInit {
                 console.error('Something went wrong!!');
 
         });
+
+        // Getting the settings
+        this.settingService.getSettings()
+            .subscribe(data => this.setting = data[0], err => console.error(err));
     }
 
-    // Delete Client
     onDelete(id: string) {
         // Confirm dialog
         Swal.fire({

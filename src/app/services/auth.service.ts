@@ -20,4 +20,8 @@ export class AuthService {
     getAuth(): Observable<firebase.User>{
         return this.angularFireAuth.authState;
     }
+
+    signup(email: string, password: string): Promise<firebase.auth.UserCredential>{
+        return this.angularFireAuth.auth.createUserWithEmailAndPassword(email, password);
+    }
 }

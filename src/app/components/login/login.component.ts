@@ -19,6 +19,7 @@ export class LoginComponent implements OnInit {
     ) { }
 
     ngOnInit() {
+        // Prevent the logged in user from returning to the login page
         this.authService.getAuth().subscribe(user => {
             if(user)
                 this.router.navigate([('/dashboard')]);

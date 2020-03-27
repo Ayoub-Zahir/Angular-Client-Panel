@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Client } from 'src/app/models/Client';
+
 import { ClientService } from 'src/app/services/client.service';
+import { SettingService } from 'src/app/services/setting.service';
+
+import { Client } from 'src/app/models/Client';
+import { Setting } from 'src/app/models/Setting';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -15,15 +20,21 @@ export class AddClientComponent implements OnInit {
         email: '',
         phone: '',
         location: 'America',
-        balance: null
+        balance: 0
     }
 
     loading: boolean = false;
-    disableBalanceOnAdd: boolean = false;
+    setting: Setting;
 
-    constructor(private clientService: ClientService) { }
+    constructor(
+        private clientService: ClientService,
+        private settingService: SettingService
+    ) { }
 
-    ngOnInit() { }
+    ngOnInit() { 
+        this.settingService.getSettings()
+            .subscribe(data => this.setting = data[0], err => console.error(err));
+    }
 
     onSubmit(form) {
         if (form.valid) {

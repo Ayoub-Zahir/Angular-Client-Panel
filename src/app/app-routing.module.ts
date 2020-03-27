@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule} from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 
 // Components
 import { DashboardComponent } from 'src/app/components/dashboard/dashboard.component';
-import { SettingComponent } from './components/setting/setting.component';
+import { SettingsComponent } from './components/settings/settings.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 import { AddClientComponent } from './components/add-client/add-client.component';
 import { ClientDetailsComponent } from './components/client-details/client-details.component';
@@ -12,25 +12,26 @@ import { EditClientComponent } from './components/edit-client/edit-client.compon
 import { SignupComponent } from './components/signup/signup.component';
 
 // Service
-import { AuthGardService } from 'src/app/gards/auth-gard.service';
+import { AuthGuard } from 'src/app/gards/auth.guard';
+import { SignupGuard } from 'src/app/gards/signup.guard';
 
 const routes: Routes = [
-    { path: "login", component: LoginComponent},
-    { path: "signup", component: SignupComponent},
-    { path: "", redirectTo:'/dashboard', pathMatch:'full'},
-    { path: "dashboard", component: DashboardComponent, canActivate: [AuthGardService]},
-    { path: "setting", component: SettingComponent, canActivate: [AuthGardService]},
-    { path: "add-client", component: AddClientComponent, canActivate: [AuthGardService]},
-    { path: "edit-client/:id", component: EditClientComponent, canActivate: [AuthGardService]},
-    { path: "client/:id", component: ClientDetailsComponent, canActivate: [AuthGardService]},
-    { path: "**", component: PageNotFoundComponent, canActivate: [AuthGardService]}
+    { path: "login", component: LoginComponent },
+    { path: "signup", component: SignupComponent, canActivate: [SignupGuard] },
+    { path: "", redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
+    { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
+    { path: "add-client", component: AddClientComponent, canActivate: [AuthGuard] },
+    { path: "edit-client/:id", component: EditClientComponent, canActivate: [AuthGuard] },
+    { path: "client/:id", component: ClientDetailsComponent, canActivate: [AuthGuard] },
+    { path: "**", component: PageNotFoundComponent, canActivate: [AuthGuard] }
 ];
 
 @NgModule({
     exports: [RouterModule],
     imports: [RouterModule.forRoot(routes)],
-    providers: [AuthGardService]
+    providers: [AuthGuard, SignupGuard]
 })
 export class AppRoutingModule { }
 
-export const routingComponents = [DashboardComponent, SettingComponent, PageNotFoundComponent, AddClientComponent, ClientDetailsComponent, EditClientComponent, LoginComponent, SignupComponent];
+export const routingComponents = [DashboardComponent, SettingsComponent, PageNotFoundComponent, AddClientComponent, ClientDetailsComponent, EditClientComponent, LoginComponent, SignupComponent];

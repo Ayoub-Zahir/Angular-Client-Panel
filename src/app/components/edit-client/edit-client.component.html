@@ -2,8 +2,8 @@
 
 <app-navbar></app-navbar>
 
-<div class="side-margin-left" style="min-height: 100vh;">
-    <div *ngIf="currentClient" class="uk-container uk-section">
+<div class="side-margin-left" style="min-height: calc(100vh - 70px);">
+    <div *ngIf="currentClient" class="uk-container uk-section" style="width: 80%;">
         <h2>Update client</h2>
 
         <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="uk-form-stacked uk-card uk-card-default uk-padding section-radius">
@@ -83,7 +83,7 @@
                 <div class="uk-margin">
                     <label class="uk-form-label" for="form-stacked-text">Balance</label>
                     <div class="uk-form-controls">
-                        <input [disabled]="disableBalanceOnAdd" class="uk-input" [class.uk-form-danger]="balance.invalid && balance.touched" type="number" min="0" name="balance" [(ngModel)]="currentClient.balance" #balance="ngModel" required>
+                        <input [disabled]="setting?.disableBalanceOnEdit" class="uk-input" [class.uk-form-danger]="balance.invalid && balance.touched" type="number" min="0" name="balance" [(ngModel)]="currentClient.balance" #balance="ngModel" required>
                     </div>
 
                     <!-- Validation errors -->
