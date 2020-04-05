@@ -7,6 +7,7 @@ import { FormsModule } from '@angular/forms';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireFunctionsModule } from '@angular/fire/functions';
 
 // Environment
 import { environment } from 'src/environments/environment';
@@ -26,6 +27,7 @@ import { AppRoutingModule, routingComponents } from 'src/app/app-routing.module'
 import { ClientService } from 'src/app/services/client.service';
 import { AuthService } from 'src/app/services/auth.service';
 import { SettingService } from 'src/app/services/setting.service';
+import { ClaimsService } from 'src/app/services/claims.service';
 
 @NgModule({
     declarations: [
@@ -43,9 +45,10 @@ import { SettingService } from 'src/app/services/setting.service';
         AppRoutingModule,
         AngularFireModule.initializeApp(environment.firebase),
         AngularFirestoreModule,
-        AngularFireAuthModule
+        AngularFireAuthModule,
+        AngularFireFunctionsModule
     ],
-    providers: [ClientService, AuthService, SettingService],
+    providers: [ClientService, AuthService, SettingService, ClaimsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

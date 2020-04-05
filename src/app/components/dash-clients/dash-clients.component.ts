@@ -35,11 +35,11 @@ export class DashClientsComponent implements OnInit {
 
                 // Success alert after deleting the client
                 Swal.fire({
-                    title:'Deleted!',
-                    text:'The client has been deleted.',
-                    icon:'success',
+                    title: 'Deleted!',
+                    text: 'The client has been deleted.',
+                    icon: 'success',
                     showConfirmButton: false,
-                    timer:2000
+                    timer: 2000
                 });
             }
         })

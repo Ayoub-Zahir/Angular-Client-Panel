@@ -12,15 +12,16 @@ import { EditClientComponent } from './components/edit-client/edit-client.compon
 import { SignupComponent } from './components/signup/signup.component';
 
 // Service
-import { AuthGuard } from 'src/app/gards/auth.guard';
-import { SignupGuard } from 'src/app/gards/signup.guard';
+import { AuthGuard } from 'src/app/guards/auth.guard';
+import { SignupGuard } from 'src/app/guards/signup.guard';
+import { AdminGuard } from 'src/app/guards/admin.guard';
 
 const routes: Routes = [
     { path: "login", component: LoginComponent },
     { path: "signup", component: SignupComponent, canActivate: [SignupGuard] },
     { path: "", redirectTo: '/dashboard', pathMatch: 'full' },
     { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
-    { path: "settings", component: SettingsComponent, canActivate: [AuthGuard] },
+    { path: "settings", component: SettingsComponent, canActivate: [AuthGuard, AdminGuard] },
     { path: "add-client", component: AddClientComponent, canActivate: [AuthGuard] },
     { path: "edit-client/:id", component: EditClientComponent, canActivate: [AuthGuard] },
     { path: "client/:id", component: ClientDetailsComponent, canActivate: [AuthGuard] },

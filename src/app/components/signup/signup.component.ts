@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/services/auth.service';
 import Swal from 'sweetalert2';
+
+// Services
+import { AuthService } from 'src/app/services/auth.service';
+import { ClaimsService } from 'src/app/services/claims.service';
 
 @Component({
     selector: 'app-signup',
@@ -13,18 +16,18 @@ export class SignupComponent implements OnInit {
     email: string = '';
     password: string = '';
     confirmPassword: string = '';
-
     loading: boolean = false;
 
     constructor(
         private router: Router,
-        private authService: AuthService
+        private authService: AuthService,
+        private claimsService: ClaimsService,
     ) { }
 
     ngOnInit() {
         // Prevent the logged in user from returning to the signup page
         this.authService.getAuth().subscribe(user => {
-            if(user)
+            if (user)
                 this.router.navigate([('/dashboard')]);
         })
     }
@@ -35,23 +38,34 @@ export class SignupComponent implements OnInit {
             this.loading = true;
 
             this.authService.signup(form.value.email, form.value.password)
-                .then( () => {
-                    this.router.navigate(['/dashboard']);
+                .then((userRecord) => {
 
-                    // Success login
-                    Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'You Sigu up successfully !!',
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    // Set default user permission
+                    this.claimsService.setDefaultUserPermission(userRecord.user.uid)
+                        .subscribe(res => {
+                            console.log(res);
+
+                            // RefreshToken
+                            this.authService.refreshToken().then(() => {
+
+                                this.router.navigate(['/dashboard']);
+
+                                // Success login
+                                Swal.fire({
+                                    position: 'top-end',
+                                    icon: 'success',
+                                    title: 'You Sigu up successfully !!',
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                });
+                            });
+                        });
                 })
                 .catch(err => {
                     this.loading = false;
-                    
-                    if(err.code === 'auth/email-already-in-use'){
-                        form.controls.email.setErrors({'emailExist': true});
+
+                    if (err.code === 'auth/email-already-in-use') {
+                        form.controls.email.setErrors({ 'emailExist': true });
                         form.controls.password.markAsTouched();
                     }
                 });

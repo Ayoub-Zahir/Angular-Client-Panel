@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./sidebar.component.css']
 })
 export class SidebarComponent implements OnInit {
+    isAdmin: boolean;
 
     constructor(
         private authService: AuthService,
@@ -15,7 +16,11 @@ export class SidebarComponent implements OnInit {
     ) { }
 
     ngOnInit() {
-
+        this.authService.getAuthClaims()
+            .subscribe(claims => {
+                if (claims)
+                    this.isAdmin = claims.admin;
+            });
     }
 
     logout() {

@@ -1,106 +1,137 @@
-<app-sidebar></app-sidebar>
-
-<app-navbar></app-navbar>
-
-<div class="side-margin-left" style="min-height: calc(100vh - 70px);">
-    <div *ngIf="currentClient" class="uk-container uk-section" style="width: 80%;">
-        <h2>Update client</h2>
-
-        <form (ngSubmit)="onSubmit(form)" #form="ngForm" class="uk-form-stacked uk-card uk-card-default uk-padding section-radius">
-            <fieldset class="uk-fieldset">
-
-                <!-- Fisrt name field  -->
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">First Name</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-input" [class.uk-form-danger]="firstName.invalid && firstName.touched" type="text" name="firstName" [(ngModel)]="currentClient.firstName" #firstName="ngModel" required minlength="3">
-                    </div>
-
-                    <!-- Validation errors -->
-                    <div *ngIf="firstName.errors && firstName.touched">
-                        <p [hidden]="!firstName.errors?.required" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">First name required.</p>
-                        <p [hidden]="!firstName.errors?.minlength" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Must be more at least 3 caracters.</p>
-                    </div>
-                </div>
-
-                <!-- Last name field  -->
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Last Name</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-input" [class.uk-form-danger]="lastName.invalid && lastName.touched" type="text" name="lastName" [(ngModel)]="currentClient.lastName" #lastName="ngModel" required minlength="3">
-                    </div>
-
-                    <!-- Validation errors -->
-                    <div *ngIf="lastName.errors && lastName.touched">
-                        <p [hidden]="!lastName.errors?.required" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Last name required.</p>
-                        <p [hidden]="!lastName.errors?.minlength" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Must be more at least 3 caracters.</p>
-                    </div>
-                </div>
-
-                <!-- Email field  -->
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Email</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-input" [class.uk-form-danger]="email.invalid && email.touched" type="text" name="email" [(ngModel)]="currentClient.email" #email="ngModel" required pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
-                    </div>
-
-                    <!-- Validation errors -->
-                    <div *ngIf="email.errors && email.touched">
-                        <p [hidden]="!email.errors?.required" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Email required.</p>
-                        <p [hidden]="!email.errors?.pattern" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Email is not valid.</p>
-                    </div>
-                </div>
-
-                <!-- Phone field  -->
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Phone</label>
-                    <div class="uk-form-controls">
-                        <input class="uk-input" [class.uk-form-danger]="phone.invalid && phone.touched" type="text" name="phone" [(ngModel)]="currentClient.phone" #phone="ngModel" required pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3}">
-                    </div>
-
-                    <!-- Validation errors -->
-                    <div *ngIf="phone.errors && phone.touched">
-                        <p [hidden]="!phone.errors?.required" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Phone required.</p>
-                        <p [hidden]="!phone.errors?.pattern" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Phone is not valid.</p>
-                    </div>
-                </div>
-
-                <!-- Location field  -->
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Location</label>
-                    <div class="uk-form-controls">
-                        <select class="uk-select" [(ngModel)]="currentClient.location" name="location">
-                        <option>Morocco</option>
-                        <option>Japon</option>
-                        <option>France</option>
-                        <option>America</option>
-                        <option>Canada</option>
-                    </select>
-                    </div>
-                </div>
-
-                <!-- Balance field  -->
-                <div class="uk-margin">
-                    <label class="uk-form-label" for="form-stacked-text">Balance</label>
-                    <div class="uk-form-controls">
-                        <input [disabled]="setting?.disableBalanceOnEdit" class="uk-input" [class.uk-form-danger]="balance.invalid && balance.touched" type="number" min="0" name="balance" [(ngModel)]="currentClient.balance" #balance="ngModel" required>
-                    </div>
-
-                    <!-- Validation errors -->
-                    <div *ngIf="balance.errors && balance.touched">
-                        <p [hidden]="!balance.errors?.required" class="uk-text-danger" style="margin-top: 6px;font-size: .9rem;">Balance required.</p>
-                    </div>
-                </div>
-
-                <!-- Submit  -->
-                <div *ngIf="loading" class="uk-margin">
-                    <button class="uk-button uk-button-warning uk-width-1-1 uk-text-bold uk-border-pill" type="submit" uk-spinner="ratio: 0.9"></button>
-                </div>
-                <div *ngIf="!loading" class="uk-margin">
-                    <button class="uk-button uk-button-warning uk-width-1-1 uk-text-bold uk-border-pill" type="submit">Update</button>
-                </div>
-
-            </fieldset>
-        </form>
+<div class="uk-grid-collapse uk-child-width-expand@s" uk-grid>
+    <div class="uk-width-1-1">
+        <app-navbar></app-navbar>
     </div>
+
+    <div class="uk-width-1-5 uk-visible@l">
+        <app-sidebar></app-sidebar>
+    </div>
+
+    <div class="uk-width-expand" style="min-height: calc(100vh - 70px);">
+
+        <div *ngIf="currentClient" class="uk-container uk-section" style="width: 80%;">
+            <h2>Update client</h2>
+
+            <form (ngSubmit)="onSubmit(form)" #form="ngForm"
+                class="uk-form-stacked uk-card uk-card-default uk-padding section-radius">
+                <fieldset class="uk-fieldset">
+
+                    <!-- Fisrt name field  -->
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">First Name</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" [class.uk-form-danger]="firstName.invalid && firstName.touched"
+                                type="text" name="firstName" [(ngModel)]="currentClient.firstName" #firstName="ngModel"
+                                required minlength="3">
+                        </div>
+
+                        <!-- Validation errors -->
+                        <div *ngIf="firstName.errors && firstName.touched">
+                            <p [hidden]="!firstName.errors?.required" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">First name required.</p>
+                            <p [hidden]="!firstName.errors?.minlength" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Must be more at least 3 caracters.</p>
+                        </div>
+                    </div>
+
+                    <!-- Last name field  -->
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Last Name</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" [class.uk-form-danger]="lastName.invalid && lastName.touched"
+                                type="text" name="lastName" [(ngModel)]="currentClient.lastName" #lastName="ngModel"
+                                required minlength="3">
+                        </div>
+
+                        <!-- Validation errors -->
+                        <div *ngIf="lastName.errors && lastName.touched">
+                            <p [hidden]="!lastName.errors?.required" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Last name required.</p>
+                            <p [hidden]="!lastName.errors?.minlength" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Must be more at least 3 caracters.</p>
+                        </div>
+                    </div>
+
+                    <!-- Email field  -->
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Email</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" [class.uk-form-danger]="email.invalid && email.touched" type="text"
+                                name="email" [(ngModel)]="currentClient.email" #email="ngModel" required
+                                pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?">
+                        </div>
+
+                        <!-- Validation errors -->
+                        <div *ngIf="email.errors && email.touched">
+                            <p [hidden]="!email.errors?.required" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Email required.</p>
+                            <p [hidden]="!email.errors?.pattern" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Email is not valid.</p>
+                        </div>
+                    </div>
+
+                    <!-- Phone field  -->
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Phone</label>
+                        <div class="uk-form-controls">
+                            <input class="uk-input" [class.uk-form-danger]="phone.invalid && phone.touched" type="text"
+                                name="phone" [(ngModel)]="currentClient.phone" #phone="ngModel" required
+                                pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}-[0-9]{3}">
+                        </div>
+
+                        <!-- Validation errors -->
+                        <div *ngIf="phone.errors && phone.touched">
+                            <p [hidden]="!phone.errors?.required" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Phone required.</p>
+                            <p [hidden]="!phone.errors?.pattern" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Phone is not valid.</p>
+                        </div>
+                    </div>
+
+                    <!-- Location field  -->
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Location</label>
+                        <div class="uk-form-controls">
+                            <select class="uk-select" [(ngModel)]="currentClient.location" name="location">
+                                <option>Morocco</option>
+                                <option>Japon</option>
+                                <option>France</option>
+                                <option>America</option>
+                                <option>Canada</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Balance field  -->
+                    <div class="uk-margin">
+                        <label class="uk-form-label" for="form-stacked-text">Balance</label>
+                        <div class="uk-form-controls">
+                            <input [disabled]="setting?.disableBalanceOnEdit" class="uk-input"
+                                [class.uk-form-danger]="balance.invalid && balance.touched" type="number" min="0"
+                                name="balance" [(ngModel)]="currentClient.balance" #balance="ngModel" required>
+                        </div>
+
+                        <!-- Validation errors -->
+                        <div *ngIf="balance.errors && balance.touched">
+                            <p [hidden]="!balance.errors?.required" class="uk-text-danger"
+                                style="margin-top: 6px;font-size: .9rem;">Balance required.</p>
+                        </div>
+                    </div>
+
+                    <!-- Submit  -->
+                    <div *ngIf="loading" class="uk-margin">
+                        <button class="uk-button uk-button-warning uk-width-1-1 uk-text-bold uk-border-pill"
+                            type="submit" uk-spinner="ratio: 0.9"></button>
+                    </div>
+                    <div *ngIf="!loading" class="uk-margin">
+                        <button class="uk-button uk-button-warning uk-width-1-1 uk-text-bold uk-border-pill"
+                            type="submit">Update</button>
+                    </div>
+
+                </fieldset>
+            </form>
+        </div>
+
+    </div>
+
 </div>

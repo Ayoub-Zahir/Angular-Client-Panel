@@ -6,12 +6,26 @@
     overflow-x: hidden;
     overflow-y: auto;
     background-color: #0D1B1E;
-    width: 20vw;
-    max-width: 350px;
-    min-width: 250px;
     z-index: 1;
+    width: 240px;
 }
 
-.bar-wrap {
-    padding: 2rem;
+.uk-active > a{
+    background-color: rgba(245, 245, 245, 0.1);
+    border-left: solid 5px #F25F5C;
+    border-radius: 5px;
+}
+
+.active{
+    background-color: rgba(245, 245, 245, 0.07);
+    border-radius: 5px; 
+    color: #fff !important;
+}
+
+.uk-nav li a {
+    padding: 10px 10px;
+}
+
+.uk-nav li.logo{
+    height: 70px;
 }
