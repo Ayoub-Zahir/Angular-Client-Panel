@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ClientService } from 'src/app/services/client.service';
-import { SettingService } from 'src/app/services/setting.service';
 
 import { Client } from 'src/app/models/Client';
-import { Setting } from 'src/app/models/Setting';
 
 import Swal from 'sweetalert2';
 
@@ -24,16 +22,13 @@ export class AddClientComponent implements OnInit {
     }
 
     loading: boolean = false;
-    setting: Setting;
 
     constructor(
-        private clientService: ClientService,
-        private settingService: SettingService
+        private clientService: ClientService
     ) { }
 
     ngOnInit() { 
-        this.settingService.getSettings()
-            .subscribe(data => this.setting = data[0], err => console.error(err));
+
     }
 
     onSubmit(form) {
@@ -93,5 +88,4 @@ export class AddClientComponent implements OnInit {
                 focusConfirm: false,
             });    
     }
-
 }

@@ -10,9 +10,9 @@
 
     <div class="uk-width-expand" style="min-height: calc(100vh - 70px);">
 
-        <div *ngIf="setting" class="uk-container uk-section" style="width: 80%;">
+        <div class="uk-container uk-section" style="width: 80%;">
             <h2>Settings</h2>
-            <form (ngSubmit)="onSubmit(settigsForm)" #settigsForm="ngForm"
+            <form (ngSubmit)="onSubmit(settingsForm)" #settingsForm="ngForm"
                 class="uk-card uk-card-default uk-padding-small section-radius" style="margin: auto !important;">
 
                 <!-- setting 1  -->
@@ -24,8 +24,7 @@
 
                         <div class="uk-width-1-3 uk-text-right">
                             <label class="switch">
-                                <input type="checkbox" name="disableBalanceOnAdd"
-                                    [(ngModel)]="setting.disableBalanceOnAdd">
+                                <input type="checkbox" name="disableBalanceOnAdd">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -43,8 +42,7 @@
 
                         <div class="uk-width-1-3 uk-text-right">
                             <label class="switch">
-                                <input type="checkbox" name="disableBalanceOnEdit"
-                                    [(ngModel)]="setting.disableBalanceOnEdit">
+                                <input type="checkbox" name="disableBalanceOnEdit">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -62,7 +60,7 @@
 
                         <div class="uk-width-1-3 uk-text-right">
                             <label class="switch">
-                                <input type="checkbox" name="disableSignup" [(ngModel)]="setting.disableSignup">
+                                <input type="checkbox" name="disableSignup">
                                 <span class="slider round"></span>
                             </label>
                         </div>
@@ -70,7 +68,7 @@
                 </div>
 
                 <div class="uk-margin-top uk-text-center">
-                    <button [hidden]="loading" [disabled]="!settigsForm.dirty"
+                    <button [hidden]="loading" [disabled]="!settingsForm.dirty"
                         class="uk-button uk-button-primary uk-text-bold uk-border-pill uk-width-1-3" type="submit">save
                         changes</button>
                     <button [hidden]="!loading"

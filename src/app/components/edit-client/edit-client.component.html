@@ -106,9 +106,9 @@
                     <div class="uk-margin">
                         <label class="uk-form-label" for="form-stacked-text">Balance</label>
                         <div class="uk-form-controls">
-                            <input [disabled]="setting?.disableBalanceOnEdit" class="uk-input"
-                                [class.uk-form-danger]="balance.invalid && balance.touched" type="number" min="0"
-                                name="balance" [(ngModel)]="currentClient.balance" #balance="ngModel" required>
+                            <input class="uk-input" [class.uk-form-danger]="balance.invalid && balance.touched"
+                                type="number" min="0" name="balance" [(ngModel)]="currentClient.balance"
+                                #balance="ngModel" required>
                         </div>
 
                         <!-- Validation errors -->

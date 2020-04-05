@@ -1,7 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Client } from 'src/app/models/client';
 import { Observable } from 'rxjs';
+
+import { AuthService } from 'src/app/services/auth.service';
 import { ClientService } from 'src/app/services/client.service';
+
+import { Client } from 'src/app/models/Client';
+import { Permissions } from 'src/app/models/Permissions';
+
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,11 +17,18 @@ import Swal from 'sweetalert2';
 export class DashClientsComponent implements OnInit {
     @Input() clientsObs: Observable<Client[]>;
     clients: Client[];
+    permissions: Permissions;
 
-    constructor(private clientService: ClientService) { }
+    constructor(
+        private clientService: ClientService,
+        private authService: AuthService
+    ) { }
 
     ngOnInit() {
         this.clientsObs.subscribe(data => this.clients = data);
+
+        // Getting auth permissions
+        this.authService.getAuthClaims().subscribe(claims => this.permissions = claims.permissions);
     }
 
     onDelete(id: string) {

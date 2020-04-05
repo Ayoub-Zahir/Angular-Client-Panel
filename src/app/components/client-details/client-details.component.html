@@ -17,9 +17,9 @@
 
                 <!-- Edit && Delete button  -->
                 <div class="uk-float-right">
-                    <button routerLink="/edit-client/{{client?.id}}"
+                    <button *ngIf="permissions?.canEditClient" routerLink="/edit-client/{{client?.id}}"
                         class="uk-button uk-button-secondary edit-btn uk-text-bold">Edit</button>
-                    <button (click)="onDelete(client.id)"
+                    <button *ngIf="permissions?.canDeleteClient" (click)="onDelete(client.id)"
                         class="uk-button uk-button-danger delete-btn uk-text-bold">Delete</button>
                 </div>
             </div>
@@ -35,26 +35,31 @@
                     <h3 class="uk-card-title uk-text-center uk-text-bold uk-margin-remove-bottom">
                         {{client?.firstName | titlecase}} {{client?.lastName | titlecase}}</h3>
 
-                    <!-- Balance button  -->
-                    <button class="uk-button uk-align-center uk-text-bold" [ngClass]="hasBalance? 'danger' : 'primary'"
+                    <!-- Update balance button -->
+                    <button *ngIf="permissions?.canEditClient" class="uk-button uk-align-center uk-text-bold" [ngClass]="hasBalance? 'danger' : 'primary'"
                         uk-toggle="target: #update" uk-tooltip="title:Update the balance; pos: bottom">
                         Balance
                         <span class="uk-margin-right ">{{client?.balance|currency}}</span>
                         <span class="material-icons uk-text-middle ">edit</span>
                     </button>
 
-                    <!-- update balance  -->
-                    <form *ngIf="client" (ngSubmit)="onSubmit()" hidden id="update" class="uk-flex uk-flex-center"
+                    <!-- update balance Form -->
+                    <form *ngIf="client && permissions?.canEditClient" (ngSubmit)="onSubmit()" hidden id="update" class="uk-flex uk-flex-center"
                         uk-grid>
                         <div>
-                            <input [disabled]="setting?.disableBalanceOnEdit" class="uk-input" type="number" min="0"
+                            <input class="uk-input" type="number" min="0"
                                 name="balance" [(ngModel)]="client.balance" style="height: 37.07px;">
                         </div>
                         <div class="uk-padding-remove-left">
-                            <button [disabled]="setting?.disableBalanceOnEdit"
-                                class="uk-button uk-button-warning uk-text-bold" type="submit">Update</button>
+                            <button class="uk-button uk-button-warning uk-text-bold" type="submit">Update</button>
                         </div>
                     </form>
+
+                    <!-- Balance -->
+                    <button *ngIf="!permissions?.canEditClient" class="uk-button uk-align-center uk-text-bold" [ngClass]="hasBalance? 'danger' : 'primary'" style="cursor: default;">
+                        Balance
+                        <span class="uk-margin-right ">{{client?.balance|currency}}</span>
+                    </button>
 
                     <!-- More info  -->
                     <ul class="uk-list uk-list-large uk-list-divider uk-margin-top ">

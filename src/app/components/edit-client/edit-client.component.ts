@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { SettingService } from 'src/app/services/setting.service';
 import { ClientService } from 'src/app/services/client.service';
 
 import { Client } from 'src/app/models/client';
-import { Setting } from 'src/app/models/Setting';
 
 import Swal from 'sweetalert2';
 
@@ -18,12 +16,10 @@ export class EditClientComponent implements OnInit {
     currentClient: Client;
     loading: boolean = false;
     idClient: string;
-    setting: Setting;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private clientService: ClientService,
-        private settingService: SettingService,
         private router: Router
     ) { }
 
@@ -38,9 +34,6 @@ export class EditClientComponent implements OnInit {
                 console.error('Something went wrong!!');
         });
 
-        // Getting the settings
-        this.settingService.getSettings()
-            .subscribe(data => this.setting = data[0], err => console.error(err));
     }
 
     onSubmit(form) {

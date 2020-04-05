@@ -1,5 +1,12 @@
 <div class="uk-container uk-section">
-    <h2>Clients</h2>
+    <div class="uk-clearfix">
+        <h2 class="uk-float-left">Clients</h2>
+        <button *ngIf="permissions?.canAddClient"
+            class="uk-button uk-button-primary uk-float-right uk-text-bold uk-border-pill" routerLink="/add-client">
+            <span class="uk-margin-small-right" uk-icon="plus"></span> Add Client
+        </button>
+    </div>
+
 
     <div class="uk-card uk-card-default uk-padding section-radius uk-overflow-auto">
         <table class="uk-table uk-table-divider uk-text-nowrap table-hover">
@@ -18,7 +25,8 @@
             <tbody>
                 <tr class="uk-box-shadow-hover-medium" *ngFor="let client of clients">
                     <td routerLink="/client/{{client.id}}" style="cursor: pointer;">
-                        <img src="{{client.img}}" alt="{{client.lastName}}Img" class="uk-border-circle avatar-size uk-preserve-width">
+                        <img src="{{client.img}}" alt="{{client.lastName}}Img"
+                            class="uk-border-circle avatar-size uk-preserve-width">
                     </td>
                     <td class="uk-text-middle">{{client.firstName | titlecase}}</td>
                     <td class="uk-text-middle">{{client.lastName | uppercase}}</td>
@@ -29,16 +37,20 @@
                     <td class="uk-text-middle">
                         <a href="#" class="uk-icon-link" uk-icon="more"></a>
 
-                        <div uk-dropdown="pos: bottom-justify; mode: click" style="padding: 20px; min-width: 150px !important;">
+                        <div uk-dropdown="pos: bottom-justify; mode: click"
+                            style="padding: 20px; min-width: 150px !important;">
                             <ul class="uk-nav uk-dropdown-nav">
                                 <li>
-                                    <a routerLink="/client/{{client.id}}" class="details"><span class="uk-margin-small-right " uk-icon="icon: info"></span>More Details</a>
+                                    <a routerLink="/client/{{client.id}}" class="details"><span
+                                            class="uk-margin-small-right " uk-icon="icon: info"></span>More Details</a>
                                 </li>
-                                <li>
-                                    <a routerLink="/edit-client/{{client.id}}" class="edit"><span class="uk-margin-small-right" uk-icon="icon: pencil"></span> Edit</a>
+                                <li *ngIf="permissions?.canEditClient">
+                                    <a routerLink="/edit-client/{{client.id}}" class="edit"><span
+                                            class="uk-margin-small-right" uk-icon="icon: pencil"></span> Edit</a>
                                 </li>
-                                <li>
-                                    <a (click)="onDelete(client.id)" class="delete"><span class="uk-margin-small-right" uk-icon="icon: trash"></span> Delete</a>
+                                <li *ngIf="permissions?.canDeleteClient">
+                                    <a (click)="onDelete(client.id)" class="delete"><span class="uk-margin-small-right"
+                                            uk-icon="icon: trash"></span> Delete</a>
                                 </li>
                             </ul>
                         </div>

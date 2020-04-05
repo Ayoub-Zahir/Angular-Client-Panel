@@ -13,17 +13,18 @@ import { SignupComponent } from './components/signup/signup.component';
 
 // Service
 import { AuthGuard } from 'src/app/guards/auth.guard';
-import { SignupGuard } from 'src/app/guards/signup.guard';
 import { AdminGuard } from 'src/app/guards/admin.guard';
+import { AddClientGuard } from 'src/app/guards/add-client.guard';
+import { EditClientGuard } from 'src/app/guards/edit-client.guard';
 
 const routes: Routes = [
     { path: "login", component: LoginComponent },
-    { path: "signup", component: SignupComponent, canActivate: [SignupGuard] },
+    { path: "signup", component: SignupComponent },
     { path: "", redirectTo: '/dashboard', pathMatch: 'full' },
     { path: "dashboard", component: DashboardComponent, canActivate: [AuthGuard] },
     { path: "settings", component: SettingsComponent, canActivate: [AuthGuard, AdminGuard] },
-    { path: "add-client", component: AddClientComponent, canActivate: [AuthGuard] },
-    { path: "edit-client/:id", component: EditClientComponent, canActivate: [AuthGuard] },
+    { path: "add-client", component: AddClientComponent, canActivate: [AuthGuard, AddClientGuard] },
+    { path: "edit-client/:id", component: EditClientComponent, canActivate: [AuthGuard, EditClientGuard] },
     { path: "client/:id", component: ClientDetailsComponent, canActivate: [AuthGuard] },
     { path: "**", component: PageNotFoundComponent, canActivate: [AuthGuard] }
 ];
@@ -31,7 +32,7 @@ const routes: Routes = [
 @NgModule({
     exports: [RouterModule],
     imports: [RouterModule.forRoot(routes)],
-    providers: [AuthGuard, SignupGuard]
+    providers: [AuthGuard, AdminGuard, AddClientGuard, EditClientGuard]
 })
 export class AppRoutingModule { }
 

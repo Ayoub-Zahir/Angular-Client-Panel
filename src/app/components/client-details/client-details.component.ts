@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { SettingService } from 'src/app/services/setting.service';
 import { ClientService } from 'src/app/services/client.service';
+import { AuthService } from 'src/app/services/auth.service';
 
-import { Setting } from 'src/app/models/Setting';
 import { Client } from 'src/app/models/client';
+import { Permissions } from 'src/app/models/Permissions';
 
 import Swal from 'sweetalert2';
 
@@ -17,12 +17,12 @@ import Swal from 'sweetalert2';
 export class ClientDetailsComponent implements OnInit {
     client: Client;
     hasBalance: boolean = false;
-    setting: Setting;
+    permissions: Permissions;
 
     constructor(
         private activeRoute: ActivatedRoute,
         private clientService: ClientService,
-        private settingService: SettingService,
+        private authService: AuthService,
         private router: Router
     ) { }
 
@@ -43,9 +43,8 @@ export class ClientDetailsComponent implements OnInit {
 
         });
 
-        // Getting the settings
-        this.settingService.getSettings()
-            .subscribe(data => this.setting = data[0], err => console.error(err));
+        // Getting auth permissions
+        this.authService.getAuthClaims().subscribe(claims => this.permissions = claims.permissions);
     }
 
     onDelete(id: string) {
@@ -78,7 +77,7 @@ export class ClientDetailsComponent implements OnInit {
     }
 
     // Update balance
-    onSubmit(){
+    onSubmit() {
         this.clientService.updateClient(this.client);
 
         if (this.client.balance > 0)

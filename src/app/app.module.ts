@@ -26,7 +26,6 @@ import { AppRoutingModule, routingComponents } from 'src/app/app-routing.module'
 // Services
 import { ClientService } from 'src/app/services/client.service';
 import { AuthService } from 'src/app/services/auth.service';
-import { SettingService } from 'src/app/services/setting.service';
 import { ClaimsService } from 'src/app/services/claims.service';
 
 @NgModule({
@@ -48,7 +47,7 @@ import { ClaimsService } from 'src/app/services/claims.service';
         AngularFireAuthModule,
         AngularFireFunctionsModule
     ],
-    providers: [ClientService, AuthService, SettingService, ClaimsService],
+    providers: [ClientService, AuthService, ClaimsService],
     bootstrap: [AppComponent]
 })
 export class AppModule { }
